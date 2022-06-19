@@ -6,7 +6,12 @@ import { ReactComponent as InstagramLogoSVG } from "../../assets/instagram.svg";
 import { ReactComponent as TwitterLogoSVG } from "../../assets/twitter.svg";
 import { ReactComponent as YoutubeLogoSVG } from "../../assets/youtube.svg";
 
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
+
+import "./header.css";
+
+import {useContext} from 'react';
+import {DarkModeContext} from "../../Context.js";
 
 //массив данных ссылок
 const swLinks = [
@@ -33,8 +38,14 @@ const swLinks = [
 ];
 
 export const Header = ({ fan }) => {
+  const {darkMode, toggleDarkMode} = useContext(DarkModeContext);
+
+  const handleClick = () => {
+    toggleDarkMode();
+  }
+
   return (
-    <header>
+    <header className={darkMode ? 'Container-dark' : 'Container-light'}>
       <div className="links-layout">
         {swLinks.map((link) => (
           <a
@@ -64,9 +75,12 @@ export const Header = ({ fan }) => {
           }}
         />
 
-        <div style={{ color: "white", paddingTop: "1rem" }}>
+        <div style={{ paddingTop: "1rem" }}>
           I am fan of: {fan}
         </div>
+
+        
+        <button className="button-4" onClick={handleClick}>switch theme</button>
       </div>
     </header>
   );

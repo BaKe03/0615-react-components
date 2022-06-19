@@ -7,6 +7,7 @@ import "./App.css";
 import { Header } from "./components/header";
 import { Content } from "./components/content";
 import { Footer } from "./components/footer";
+import { DarkModeProvider } from "./Context";
 
 export default function App() {
   const [fan, setFan] = useState("");
@@ -17,11 +18,13 @@ export default function App() {
 
   return (
     <DefaultContext.Provider value={{ handleCreateFan }}>
-      <Header fan={fan} />
+      <DarkModeProvider> <Header fan={fan} /> </DarkModeProvider>
+      
       <hr />
       <Content />
       <hr />
-      <Footer />
+      
+      <DarkModeProvider> <Footer /> </DarkModeProvider>
     </DefaultContext.Provider>
   );
 }
